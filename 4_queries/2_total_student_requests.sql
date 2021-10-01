@@ -1,0 +1,7 @@
+SELECT COUNT(assistance_requests.*), students.name
+FROM students
+JOIN assistance_requests ON students.id = assistance_requests.student_id 
+WHERE students.name = 'Elliot Dickinson'
+GROUP BY students.name;
+
+-- \i 4_queries/2_total_student_requests.sql
