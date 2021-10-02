@@ -1,9 +1,7 @@
-SELECT cohorts.name, SUM(completed_at - created_at) AS total_duration
-FROM assistance_requests
-JOIN students ON assistance_requests.student_id = students.id
-JOIN cohorts ON cohorts.id = students.id
-GROUP BY cohorts.name
-ORDER BY total_duration
-;
+SELECT assignments.id, assignments.day, assignments.chapter, assignments.name, COUNT(assistance_requests.*) AS total_requests
+FROM assignments
+JOIN assistance_requests ON assistance_requests.assignment_id = assignments.id
+GROUP BY assignments.id 
+ORDER BY total_requests DESC;
 
 -- \i 4_queries/10_most_confusing_assignments.sql
