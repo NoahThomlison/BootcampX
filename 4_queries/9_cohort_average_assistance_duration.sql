@@ -1,15 +1,10 @@
-SELECT sum(completed_at-started_at) as total_duration
-FROM assistance_requests
+SELECT AVG(total_duration)
 WHERE total_duration = (
-  SELECT AVG(total_duration)
-  FROM assistance_requests)
-JOIN students ON students.id = student_id
-JOIN cohorts on cohorts.id = cohort_id
-ORDER BY total_duration
-
-
-
-
+SELECT SUM(assistance_requests.completed_at - assistance_requests.started_at) AS total_duration
+FROM students
+JOIN assistance_requests ON assistance_requests.student_id = students.id
+JOIN cohorts ON cohorts.id = students.cohort_id
+ORDER BY total_duration)
 ;
 
 -- \i 4_queries/9_cohort_average_assistance_duration.sql
