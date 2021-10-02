@@ -1,9 +1,10 @@
-SELECT cohorts.name, SUM(completed_at - created_at) AS total_duration
+SELECT DISTINCT teachers.name AS teacher, cohorts.name, COUNT(assistance_requests.*) AS total_assistances
 FROM assistance_requests
-JOIN students ON assistance_requests.student_id = students.id
-JOIN cohorts ON cohorts.id = students.id
-GROUP BY cohorts.name
-ORDER BY total_duration
-;
+JOIN teachers ON teachers.id = assistance_requests.teacher_id
+JOIN students ON students.id = assistance_requests.student_id
+JOIN cohorts ON cohorts.id = students.cohort_id
+WHERE cohorts.name = 'JUL02'
+GROUP BY teacher, cohorts.name
+ORDER BY teacher;
 
--- \i 4_queries/10_most_confusing_assignments.sql
+-- \i 4_queries/13_name_of_teachers_and_number_of_assistances.sql
