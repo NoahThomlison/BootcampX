@@ -6,4 +6,4 @@ JOIN cohorts
 ON students.cohort_id = cohorts.id
 WHERE cohorts.name = 'FEB12';
 
--- -- \i 2_queries_joins/2_cohorts_total_assignment_time.sql;
+-- \i 2_queries_joins/2_cohorts_total_assignment_time.sql;
