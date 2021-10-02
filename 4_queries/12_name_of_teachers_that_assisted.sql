@@ -1,9 +1,46 @@
-SELECT cohorts.name, SUM(completed_at - created_at) AS total_duration
+SELECT DISTINCT(teachers.name) AS teacher, cohorts.name
+-- SELECT (teachers.name), cohorts.name
+
 FROM assistance_requests
-JOIN students ON assistance_requests.student_id = students.id
-JOIN cohorts ON cohorts.id = students.id
+JOIN teachers ON teachers.id = assistance_requests.teacher_id
+JOIN students ON students.id = assistance_requests.student_id
+JOIN cohorts ON cohorts.id = students.cohort_id
 GROUP BY cohorts.name
-ORDER BY total_duration
+-- having DISTINCT(teachers.name)
+ORDER BY (teachers.name)
+
+
+
+
+
+
+-- cohorts.name, SUM(completed_at - created_at) AS total_duration
+-- FROM assistance_requests
+-- JOIN students ON assistance_requests.student_id = students.id
+-- JOIN cohorts ON cohorts.id = students.id
+-- GROUP BY cohorts.name
+-- ORDER BY total_duration
 ;
 
--- \i 4_queries/10_most_confusing_assignments.sql
+-- \i 4_queries/12_name_of_teachers_that_assisted.sql
+
+
+
+-- We need to know which teachers actually assisted students during any cohort.
+
+-- Get the name of all teachers that performed an assistance request during a cohort.
+
+-- Select the instructor's name and the cohort's name.
+-- Don't repeat the instructor's name in the results list.
+-- Order by the instructor's name.
+-- This query needs to select data for a cohort with a specific name, use 'JUL02' for the cohort's name here.
+-- Expected Result:
+
+--       teacher       | cohort 
+-- --------------------+--------
+--  Cheyanne Powlowski | JUL02
+--  Georgiana Fahey    | JUL02
+--  Helmer Rodriguez   | JUL02
+--  Jadyn Bosco        | JUL02
+-- ...
+-- (8 rows)
